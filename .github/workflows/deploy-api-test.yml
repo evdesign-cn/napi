@@ -48,7 +48,7 @@ jobs:
           GOEXPERIMENT: greenteagc
         run: |
           set -euo pipefail
-          go build -ldflags "-s -w -X 'github.com/QuantumNous/new-api/common.Version=$(cat VERSION)'" -o new-api
+          go build -ldflags "-s -w -X 'github.com/QuantumNous/new-api/common.Version=$(cat VERSION)'" -o napi
 
       - name: Configure SSH
         env:
@@ -71,5 +71,5 @@ jobs:
           set -euo pipefail
           SERVICE_NAME="${REMOTE_SERVICE_NAME:-new-api}"
           ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "mkdir -p '$REMOTE_BIN_TARGET'"
-          rsync -az -e "ssh -i ~/.ssh/deploy_key" new-api "$SERVER_USER@$SERVER_IP:$REMOTE_BIN_TARGET/new-api"
-          ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "chmod +x '$REMOTE_BIN_TARGET/new-api' && sudo systemctl restart '$SERVICE_NAME' && sudo systemctl status '$SERVICE_NAME' --no-pager"
+          rsync -az -e "ssh -i ~/.ssh/deploy_key" napi "$SERVER_USER@$SERVER_IP:$REMOTE_BIN_TARGET/napi"
+          ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "chmod +x '$REMOTE_BIN_TARGET/napi' && sudo systemctl restart '$SERVICE_NAME' && sudo systemctl status '$SERVICE_NAME' --no-pager"
