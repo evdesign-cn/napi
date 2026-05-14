@@ -76,4 +76,4 @@ jobs:
           ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "mkdir -p '$REMOTE_BIN_TARGET'"
           rsync -az -e "ssh -i ~/.ssh/deploy_key" napi "$SERVER_USER@$SERVER_IP:$REMOTE_BIN_TARGET/napi"
           rsync -az -e "ssh -i ~/.ssh/deploy_key" "$ENV_FILE" "$SERVER_USER@$SERVER_IP:$REMOTE_BIN_TARGET/.env"
-          ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "chmod 600 '$REMOTE_BIN_TARGET/.env' && chmod +x '$REMOTE_BIN_TARGET/napi' && sudo systemctl restart '$SERVICE_NAME' && sudo systemctl status '$SERVICE_NAME' --no-pager"
+          ssh -i ~/.ssh/deploy_key "$SERVER_USER@$SERVER_IP" "test -s '$REMOTE_BIN_TARGET/.env' && chmod 600 '$REMOTE_BIN_TARGET/.env' && chmod +x '$REMOTE_BIN_TARGET/napi' && sudo -n systemctl restart '$SERVICE_NAME' && sudo -n systemctl status '$SERVICE_NAME' --no-pager"
