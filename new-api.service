@@ -8,9 +8,9 @@ Description=One API Service
 After=network.target
 
 [Service]
-User=deploy  # 注意修改用户名
-WorkingDirectory=/data/deploy/napi-test/bin  # 注意修改路径
-ExecStart=/data/deploy/napi-test/bin/napi --port 3000 --log-dir /data/deploy/napi-test/logs  # 注意修改路径和端口号
+User=ubuntu  # 注意修改用户名
+WorkingDirectory=/path/to/new-api  # 注意修改路径
+ExecStart=/path/to/new-api/new-api --port 3000 --log-dir /path/to/new-api/logs  # 注意修改路径和端口号
 Restart=always
 RestartSec=5
 
